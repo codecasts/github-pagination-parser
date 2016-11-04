@@ -1,10 +1,6 @@
 const mock = require('../mock')
-const sections = mock.split(',')
-const values = sections.map(section => section.split(';'))
+const parser = require('./parser');
 
-values.map(section => {
-  console.log(section[0]);
-  console.log(section[1]);
-})
+const data = parser(mock)
 
-// console.log(values)
+console.log(data);
