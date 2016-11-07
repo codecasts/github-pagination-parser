@@ -3,5 +3,11 @@
   "version": "0.1.0",
   "main": "./src/index.js",
   "author": "Vinicius Reis <luiz.vinicius73@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest-cli": "^16.0.2"
+  }
 }
