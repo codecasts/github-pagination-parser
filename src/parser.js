@@ -1,22 +1,33 @@
 const rxPage = /[?|&]page=(\d+)/
 const rxRel = /rel="(.+)"/
 
-const parser = str => {
-  if (typeof str !== 'string') {
+const splitInSections = str => str.split(',')
+const splitFields = section => section.split(';')
+const regexFields = section => {
+  const page = Number(rxPage.exec(section[0])[1])
+  const rel = rxRel.exec(section[1])[1]
+  return [ page, rel ]
+}
+
+const isString = str => typeof str === 'string'
+const isEmpty = str => str.length === 0
+
+const assertStr = str => {
+  if (!isString(str)) {
     throw new Error('str must be a string')
   }
 
-  if (str.length === 0) {
+  if (isEmpty(str)) {
     throw new Error('str is a invalid string')
   }
+}
 
-  return str.split(',')
-    .map(section => section.split(';'))
-    .map(section => {
-      const page = Number(rxPage.exec(section[0])[1])
-      const rel = rxRel.exec(section[1])[1]
-      return [ page, rel ]
-    })
+const parser = str => {
+  assertStr(str)
+
+  return splitInSections(str)
+    .map(splitFields)
+    .map(regexFields)
     .reduce((acc, value, index) => {
       acc[value[1]] = value[0]
 
