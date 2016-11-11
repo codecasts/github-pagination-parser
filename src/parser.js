@@ -1,21 +1,26 @@
 const assertStr = require('./assert-str')
-const rxPage = /[?|&]page=(\d+)/
-const rxRel = /rel="(.+)"/
-const splitInSections = str => str.split(',')
-const splitFields = section => section.split(';')
-const regexFields = section => {
-  const page = Number(rxPage.exec(section[0])[1])
-  const rel = rxRel.exec(section[1])[1]
-  return [ page, rel ]
-}
+const exec = (rx, str) => rx.exec(str)
+const makeExec = rx => str => exec(rx, str)
+const rxPage = makeExec(/[?|&]page=(\d+)/)
+const rxRel = makeExec(/rel="(.+)"/)
 
+const map = (arr, fn) => arr.map(fn)
+const split = (str, delimter) => str.split(delimter)
+const mapper = fn => arr => map(arr, fn)
+const splitter = delimiter => str => split(str, delimiter)
+
+const splitInSections = splitter(',')
+const splitFields = mapper(splitter(';'))
+const regexFields = mapper(section => {
+  const page = Number(rxPage(section[0])[1])
+  const rel = rxRel(section[1])[1]
+  return [ page, rel ]
+})
 
 const parser = str => {
   assertStr(str)
 
-  return splitInSections(str)
-    .map(splitFields)
-    .map(regexFields)
+  return regexFields(splitFields(splitInSections(str)))
     .reduce((acc, value, index) => {
       acc[value[1]] = value[0]
 
