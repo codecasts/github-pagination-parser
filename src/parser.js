@@ -1,13 +1,6 @@
 const assertStr = require('./assert-str')
-const exec = (rx, str) => rx.exec(str)
-const makeExec = rx => str => exec(rx, str)
-const rxPage = makeExec(/[?|&]page=(\d+)/)
-const rxRel = makeExec(/rel="(.+)"/)
-
-const map = (arr, fn) => arr.map(fn)
-const split = (str, delimter) => str.split(delimter)
-const mapper = fn => arr => map(arr, fn)
-const splitter = delimiter => str => split(str, delimiter)
+const { rxPage, rxRel } = require('./rx')
+const { mapper, splitter } = require('./helpers')
 
 const splitInSections = splitter(',')
 const splitFields = mapper(splitter(';'))
