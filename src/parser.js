@@ -1,4 +1,5 @@
 const assertStr = require('./assert-str')
+const compose = require('./compose')
 const { rxPage, rxRel } = require('./rx')
 const { mapper, splitter } = require('./helpers')
 
@@ -10,10 +11,12 @@ const regexFields = mapper(section => {
   return [ page, rel ]
 })
 
+const composed = compose(regexFields, splitFields, splitInSections)
+
 const parser = str => {
   assertStr(str)
 
-  return regexFields(splitFields(splitInSections(str)))
+  return composed(str)
     .reduce((acc, value, index) => {
       acc[value[1]] = value[0]
 
