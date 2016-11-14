@@ -1,6 +1,6 @@
-const map = (arr, fn) => arr.map(fn)
-const split = (str, delimiter) => str.split(delimiter)
-const mapper = fn => arr => map(arr, fn)
-const splitter = delimiter => str => split(str, delimiter)
+const curry = require('./curry')
 
-module.exports = { mapper, splitter }
+const map = curry((fn, arr) => arr.map(fn))
+const split = curry((delimiter, str) => str.split(delimiter))
+
+module.exports = { map, split }
