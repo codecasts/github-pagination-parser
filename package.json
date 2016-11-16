@@ -15,6 +15,9 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "collectCoverage": true
+  },
   "devDependencies": {
     "jest-cli": "^16.0.2"
   }
