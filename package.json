@@ -1,6 +1,14 @@
 {
   "name": "github-pagination-parser",
+  "description": "JavaScript parser for github pagination (link) header",
   "version": "0.1.0",
+  "keywords": ["github", "functional", "codecasts", "github-api", "pagination"],
+  "bugs": "https://github.com/codecasts/github-pagination-parser/issues",
+  "repository": "https://github.com/codecasts/github-pagination-parser",
+  "homepage": "https://github.com/codecasts/github-pagination-parser",
+  "engines": {
+    "node": ">6"
+  },
   "main": "./src/index.js",
   "author": "Vinicius Reis <luiz.vinicius73@gmail.com>",
   "license": "MIT",
