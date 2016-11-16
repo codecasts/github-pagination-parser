@@ -9,6 +9,8 @@ const assertStr = str => {
   if (isEmpty(str)) {
     throw new Error('str is a invalid string')
   }
+
+  return str
 }
 
 module.exports = assertStr;
