@@ -1,6 +1,7 @@
-const mock = require('../mock')
-const parser = require('./parser');
+const assertStr = require('./libs/assert-str')
+const compose = require('./support/compose')
+const { mountObject, regexFields, splitFields, splitInSections } = require('./libs')
 
-const data = parser(mock)
+const parser = compose(mountObject, regexFields, splitFields, splitInSections)
 
-console.log(data);
+module.exports = str => parser(assertStr(str))

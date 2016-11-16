@@ -1,4 +1,4 @@
-const parser = require('./parser');
+const parser = require('./index');
 const mock = require('../mock')
 
 test('mockfile parsed from parser function', () => {

@@ -1,7 +1,5 @@
-const assertStr = require('./assert-str')
-const compose = require('./compose')
 const { rxPage, rxRel } = require('./rx')
-const { map, split, reduceToObject } = require('./helpers')
+const { map, split, reduceToObject } = require('../support/helpers')
 
 const mountObject = reduceToObject((acc, value) => Object.assign({ [value[1]]: value[0] }, acc))
 const splitInSections = split(',')
@@ -12,6 +10,4 @@ const regexFields = map(section => {
   return [ page, rel ]
 })
 
-const parser = compose(mountObject, regexFields, splitFields, splitInSections)
-
-module.exports = str => parser(assertStr(str))
+module.exports = { mountObject, splitInSections, splitFields, regexFields }
