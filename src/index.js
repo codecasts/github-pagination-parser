@@ -7,6 +7,6 @@ const {
   splitInSections
 } = require('./libs')
 
-const parser = compose(mountObject, regexFields, splitFields, splitInSections)
+const parser = compose(mountObject, regexFields, splitFields, splitInSections, assertStr)
 
-module.exports = str => parser(assertStr(str))
+module.exports = parser
